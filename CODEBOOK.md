@@ -109,4 +109,4 @@ Activity names were loaded from `activity_labels.txt` in order to apply descript
 The dataset was then grouped by the columns `subject`, `activity_id`, and `activity_name`, and for each group, the other columns were averaged with the mean function.  Each row of the resulting dataset contains the average of each feature as well as the `subject`, `activity_id`, and `activity_name` for that group.
 
 ## Saving the data set
-The dataset was then saved as a CSV excluding the row names.
+The dataset was then saved as a TXT excluding the row names.

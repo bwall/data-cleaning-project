@@ -31,21 +31,12 @@ meanstdactivitydata <- merge(x=meanstddata, y=activity_names, by="activity_id", 
 meanstdactivitydata$subject <- as.integer(meanstdactivitydata$subject)
 meanstdactivitydata$activity_id <- as.integer(meanstdactivitydata$activity_id)
 
-# Function to apply to colmeans and retain non-numeric features
-reducingMean <- function(frame)
-{
-  data <- frame[,-grep("subject|activity_", colnames(frame))]
-  data <- colMeans(data)
-  suppressWarnings(data$subject <- frame[1, "subject"])
-  data$activity_id <- frame[1, "activity_id"]
-  data$activity_name <- frame[1, "activity_name"]
-  return(data)
-}
-
-# Create dataset based on the subject and activity that produces the average of the values
+# Grouping averages
 groupColumns <- c("subject", "activity_name", "activity_id")
 dataColumns <- colnames(meanstdactivitydata)[-grep("subject|activity_", colnames(meanstdactivitydata))]
 average_tidy_dataset <- ddply(meanstdactivitydata, groupColumns, function(x) colMeans(x[dataColumns]))
-write.csv(average_tidy_dataset, "average_tidy_dataset.csv", row.names = FALSE)
+
+# Saving the dataset
+write.table(average_tidy_dataset, "average_tidy_dataset.txt", row.names = FALSE)
 
 
